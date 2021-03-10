@@ -1,0 +1,526 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: 'My CloudFormation Stack with EC2, VPC, RDS.'
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+      - Label:
+          default: Amazon EC2 Configuration
+        Parameters:
+          - InstanceType
+          - EC2InstanceName
+          - KeyName
+          - SSHLocation
+      - Label:
+          default: Network Configuration
+        Parameters:
+          - VPCNetworkCIDR
+          - VPCNetwork0CIDR
+          - VPCNetwork1CIDR
+          - VPCNetwork2CIDR
+      - Label:
+          default: Amazon RDS Configuration
+        Parameters:
+          - RDSInstanceName
+          - RDSInstanceType
+          - MySQLUserName
+          - MySQLPassword
+          - DatabaseName
+          - DBAllocatedStorage
+    ParameterLabels:
+      VPCID:
+        default: Which VPC should this be deployed to?
+      EC2InstanceName:
+        default: Value
+      InstanceType:
+        default: Instance Type
+      KeyName:
+        default: Key Name
+      SSHLocation:
+        default: SSH Location
+      RDSInstanceName:
+        default: Value
+      RDSInstanceType:
+        default: Instance Type
+      MySQLUserName:
+        default: MySQL Admin Username
+      MySQLPassword:
+        default: MySQL Admin Password
+      DatabaseName:
+        default: Insert DB Name
+      DBAllocatedStorage:
+        default: DB Allocated Storage
+  'AWS::CloudFormation::Designer':
+    ed876a41-ce7a-4f67-a7dc-b6824311a9a8:
+      size:
+        width: 890
+        height: 680
+      position:
+        x: 50
+        'y': 30
+      z: 1
+      embeds:
+        - 88ec10f9-d886-4e29-8580-81b07007f7dd
+        - 8dfa9e28-f5ed-47fb-9a63-3790f3564856
+        - d280c925-b1f6-42f9-ac30-357dbaa079b4
+        - d7659149-467c-40b5-9f2a-655e3183b04c
+    88ec10f9-d886-4e29-8580-81b07007f7dd:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 400
+        'y': 540
+      z: 2
+      parent: ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+      embeds: []
+      iscontainedinside:
+        - ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+    39990f34-7823-48fc-9aa8-b4e39d4c8359:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: -140
+        'y': 580
+      z: 0
+      embeds: []
+      dependson:
+        - ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+    852d9e80-25bd-4933-900d-1150f4e5b89c:
+      source:
+        id: ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+      target:
+        id: 39990f34-7823-48fc-9aa8-b4e39d4c8359
+    8dfa9e28-f5ed-47fb-9a63-3790f3564856:
+      size:
+        width: 240
+        height: 240
+      position:
+        x: 580
+        'y': 390
+      z: 2
+      parent: ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+      embeds:
+        - 380442e4-8189-44eb-8b45-56abf16f3846
+      iscontainedinside:
+        - ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+    380442e4-8189-44eb-8b45-56abf16f3846:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 610
+        'y': 450
+      z: 3
+      parent: 8dfa9e28-f5ed-47fb-9a63-3790f3564856
+      embeds: []
+      isassociatedwith:
+        - 39990f34-7823-48fc-9aa8-b4e39d4c8359
+      iscontainedinside:
+        - 8dfa9e28-f5ed-47fb-9a63-3790f3564856
+      dependson:
+        - 852d9e80-25bd-4933-900d-1150f4e5b89c
+    d280c925-b1f6-42f9-ac30-357dbaa079b4:
+      size:
+        width: 240
+        height: 240
+      position:
+        x: 580
+        'y': 90
+      z: 2
+      parent: ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+      embeds:
+        - f29cdcc7-9b58-4c52-beb8-803da3f3d16e
+      iscontainedinside:
+        - ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+    1d36381a-bbfa-496e-8e80-99417e93e70a:
+      source:
+        id: 8dfa9e28-f5ed-47fb-9a63-3790f3564856
+      target:
+        id: d280c925-b1f6-42f9-ac30-357dbaa079b4
+    d7659149-467c-40b5-9f2a-655e3183b04c:
+      size:
+        width: 420
+        height: 420
+      position:
+        x: 100
+        'y': 90
+      z: 2
+      parent: ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+      embeds:
+        - f521a200-75da-4013-be2f-86c97b89689d
+      iscontainedinside:
+        - ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+    f521a200-75da-4013-be2f-86c97b89689d:
+      size:
+        width: 240
+        height: 240
+      position:
+        x: 130
+        'y': 150
+      z: 3
+      parent: d7659149-467c-40b5-9f2a-655e3183b04c
+      embeds:
+        - 72891eeb-b00a-49d2-bd1e-039c5328f7b1
+      iscontainedinside:
+        - d7659149-467c-40b5-9f2a-655e3183b04c
+      dependson:
+        - 852d9e80-25bd-4933-900d-1150f4e5b89c
+    72891eeb-b00a-49d2-bd1e-039c5328f7b1:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 160
+        'y': 210
+      z: 4
+      parent: f521a200-75da-4013-be2f-86c97b89689d
+      embeds: []
+      isassociatedwith:
+        - 88ec10f9-d886-4e29-8580-81b07007f7dd
+      iscontainedinside:
+        - f521a200-75da-4013-be2f-86c97b89689d
+    f29cdcc7-9b58-4c52-beb8-803da3f3d16e:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 610
+        'y': 150
+      z: 3
+      parent: d280c925-b1f6-42f9-ac30-357dbaa079b4
+      embeds: []
+      isassociatedwith:
+        - 88ec10f9-d886-4e29-8580-81b07007f7dd
+      iscontainedinside:
+        - d280c925-b1f6-42f9-ac30-357dbaa079b4
+      dependson:
+        - 852d9e80-25bd-4933-900d-1150f4e5b89c
+Mappings:
+  MyMap:
+    us-west-2:
+      AMI: ami-0e6eb834372626c0e
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 key pair to enable SSH access to the instances
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    ConstraintDescription: Must be the name of an existing EC2 KeyPair.
+    MinLength: '1'
+  SSHLocation:
+    Description: The IP address range that can be used to SSH to the EC2 instances
+    Type: String
+    MinLength: '9'
+    MaxLength: '18'
+    AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
+    ConstraintDescription: Must be a valid IP CIDR range of the form x.x.x.x/x.
+  VPCNetworkCIDR:
+    Description: The CIDR block for the entire VPC network
+    Type: String
+    AllowedPattern: >-
+      ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: >-
+      CIDR block parameter must be in the form x.x.x.x/16-28 for e.g 10.0.0.0/16
+      or 172.16.0.0/16
+  VPCNetwork0CIDR:
+    Description: The CIDR block for the Public network
+    Type: String
+    AllowedPattern: >-
+      ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: >-
+      CIDR block parameter must be in the form x.x.x.x/16-28 for e.g 10.0.0.0/24
+      or 172.16.0.0/24
+  VPCNetwork1CIDR:
+    Description: CIDR block for the public subnet 1 located in Availability Zone 1
+    Type: String
+    AllowedPattern: >-
+      ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: >-
+      CIDR block parameter must be in the form x.x.x.x/16-28 for e.g 10.0.1.0/24
+      or 172.16.1.0/24
+  VPCNetwork2CIDR:
+    Description: CIDR block for the public subnet 2 located in Availability Zone 2
+    Type: String
+    AllowedPattern: >-
+      ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: >-
+      CIDR block parameter must be in the form x.x.x.x/16-28 for e.g 10.0.2.0/24
+      or 172.16.2.0/24
+  EC2InstanceName:
+    Description: EC2 Instance Name
+    Type: String
+    AllowedPattern: '[a-zA-Z]*'
+    ConstraintDescription: Your EC2 instance Name in value for e.g myec2instance
+  InstanceType:
+    Description: EC2 instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+    ConstraintDescription: Must be a valid EC2 instance type.
+  MySQLUserName:
+    Description: UserName for the RDS.
+    Default: administrator
+    Type: String
+    NoEcho: 'false'
+  MySQLPassword:
+    Description: >-
+      Password for the RDS User - Between 8-32 characters; Include at least one
+      digit, upper case letter,lower case letter and no special characters.
+    Type: String
+    MinLength: '8'
+    MaxLength: '32'
+    AllowedPattern: '(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])^([a-zA-Z0-9]{8,20})'
+    ConstraintDescription: >-
+      Your Database Admin Password must be between 8 and 32 characters, include
+      at least one digit, upper case letter and only contain acceptable
+      characters.
+    NoEcho: 'true'
+  RDSInstanceName:
+    Description: RDS Instance Name
+    Type: String
+    AllowedPattern: '[a-zA-Z]*'
+    ConstraintDescription: Your RDS instance Name in value for e.g mydbinstance
+  DatabaseName:
+    Description: The name of the database inside the instance.
+    Type: String
+    AllowedPattern: '[a-zA-Z]*'
+  RDSInstanceType:
+    Description: RDS Instance Type
+    Default: db.t2.micro
+    Type: String
+    AllowedValues:
+      - db.t2.micro
+    ConstraintDescription: Must be a valid RDS Instance Type.
+  DBAllocatedStorage:
+    Default: '10'
+    Description: The size of the database (Gb)
+    Type: Number
+    MinValue: '5'
+    MaxValue: '3072'
+    ConstraintDescription: Must be between 5 and 3072Gb.
+Resources:
+  EC2:
+    Type: 'AWS::EC2::Instance'
+    DependsOn: AttachGatewayToVPC
+    Metadata:
+      'AWS::CloudFormation::Init':
+        config:
+          files:
+            /opt/aws/cloud_formation.json:
+              content: "{\n\t  \"rds\" : {\n\t\t\"database\" : \"{{database}}\",\n\t\t\"username\" : \"{{username}}\",\n\t\t\"password\" : \"{{password}}\",\n\t\t\"endpoint\" : \"{{endpoint}}\",\n\t\t\"port\"     : 3306\n\t  }\n\t}"
+              context:
+                endpoint: !GetAtt 
+                  - RDS
+                  - Endpoint.Address
+                database: !Ref DatabaseName
+                username: !Ref MySQLUserName
+                password: !Ref MySQLPassword
+              mode: '00644'
+              owner: root
+              group: root
+      'AWS::CloudFormation::Designer':
+        id: f29cdcc7-9b58-4c52-beb8-803da3f3d16e
+    Properties:
+      DisableApiTermination: 'false'
+      EbsOptimized: 'false'
+      ImageId: !FindInMap 
+        - MyMap
+        - !Ref 'AWS::Region'
+        - AMI
+      InstanceInitiatedShutdownBehavior: stop
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      Monitoring: 'false'
+      SubnetId: !Ref PublicSubnet
+      Tenancy: default
+      SecurityGroupIds:
+        - !Ref SecurityGroupInstance
+      Tags:
+        - Key: Application
+          Value: !Ref 'AWS::StackName'
+        - Key: Name
+          Value: !Ref EC2InstanceName
+  RDSSubnet1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: !Ref VPCNetwork1CIDR
+      AvailabilityZone: !Select 
+        - '0'
+        - !GetAZs 
+          Ref: 'AWS::Region'
+      MapPublicIpOnLaunch: 'false'
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Ref 'AWS::StackName'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: d7659149-467c-40b5-9f2a-655e3183b04c
+  RDSSubnet2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: !Ref VPCNetwork2CIDR
+      AvailabilityZone: !Select 
+        - '1'
+        - !GetAZs 
+          Ref: 'AWS::Region'
+      MapPublicIpOnLaunch: 'false'
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Ref 'AWS::StackName'
+  DBSubnetGroup:
+    Type: 'AWS::RDS::DBSubnetGroup'
+    DependsOn: AttachGatewayToVPC
+    Properties:
+      DBSubnetGroupDescription: Subnets available for the RDS DB Instance
+      SubnetIds:
+        - !Ref RDSSubnet1
+        - !Ref RDSSubnet2
+  RDS:
+    Type: 'AWS::RDS::DBInstance'
+    DeletionPolicy: Snapshot
+    Properties:
+      AllocatedStorage: !Ref DBAllocatedStorage
+      StorageType: gp2
+      PubliclyAccessible: 'true'
+      AllowMajorVersionUpgrade: 'true'
+      AutoMinorVersionUpgrade: 'true'
+      AvailabilityZone: !Select 
+        - '0'
+        - !GetAZs 
+          Ref: 'AWS::Region'
+      BackupRetentionPeriod: '2'
+      DBInstanceIdentifier: !Ref RDSInstanceName
+      DBInstanceClass: !Ref RDSInstanceType
+      DBName: !Ref DatabaseName
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      Engine: MySQL
+      EngineVersion: 5.7.22
+      MasterUsername: !Ref MySQLUserName
+      MasterUserPassword: !Ref MySQLPassword
+      Port: '3306'
+      PreferredBackupWindow: '00:00-00:30'
+      PreferredMaintenanceWindow: 'sun:16:00-sun:17:30'
+      Tags:
+        - Key: Application
+          Value: !Ref 'AWS::StackName'
+      VPCSecurityGroups:
+        - !Ref SecurityGroupInstance
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 72891eeb-b00a-49d2-bd1e-039c5328f7b1
+  PublicSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: !Ref VPCNetwork0CIDR
+      AvailabilityZone: !Select 
+        - '0'
+        - !GetAZs 
+          Ref: 'AWS::Region'
+      MapPublicIpOnLaunch: 'true'
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Ref 'AWS::StackName'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: d280c925-b1f6-42f9-ac30-357dbaa079b4
+  RouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Ref 'AWS::StackName'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8dfa9e28-f5ed-47fb-9a63-3790f3564856
+  AssociationRtToPubSub:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId: !Ref RouteTable
+      SubnetId: !Ref PublicSubnet
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 1d36381a-bbfa-496e-8e80-99417e93e70a
+  InternetGateway:
+    DependsOn:
+      - VPC
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Ref 'AWS::StackName'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 39990f34-7823-48fc-9aa8-b4e39d4c8359
+  AttachGatewayToVPC:
+    DependsOn:
+      - VPC
+      - InternetGateway
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 852d9e80-25bd-4933-900d-1150f4e5b89c
+  Route:
+    Type: 'AWS::EC2::Route'
+    DependsOn: AttachGatewayToVPC
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+      RouteTableId: !Ref RouteTable
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 380442e4-8189-44eb-8b45-56abf16f3846
+  VPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: !Ref VPCNetworkCIDR
+      InstanceTenancy: default
+      EnableDnsSupport: 'true'
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name
+          Value: !Ref 'AWS::StackName'
+        - Key: Application
+          Value: !Ref 'AWS::StackName'
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: ed876a41-ce7a-4f67-a7dc-b6824311a9a8
+  SecurityGroupInstance:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: SG for EC2 Instance
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: !Ref SSHLocation
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '3306'
+          ToPort: '3306'
+          CidrIp: !Ref SSHLocation
+      Tags:
+        - Key: Application
+          Value: !Ref 'AWS::StackName'
+      VpcId: !Ref VPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 88ec10f9-d886-4e29-8580-81b07007f7dd
+Outputs:
+  MyURL:
+    Description: My URL
+    Value: !Join 
+      - ''
+      - - 'http://'
+        - !GetAtt 
+          - EC2
+          - PublicIp
